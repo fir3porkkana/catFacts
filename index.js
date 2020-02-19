@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 });
 
 app.get("/api/facts/", (req, res, next) => {
-    const url = `https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=5`
+    const url = `https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=250`
 
     request(
         { url },
