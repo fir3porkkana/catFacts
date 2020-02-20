@@ -6,7 +6,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom"
 import { createStore, useStore } from "react-hookstore"
 import Header from "./components/Header"
 import FactList from "./components/FactList"
-
+import selectRandom from "./utilities"
+import OneFact from './components/OneFact';
 createStore("factStore", null)
 createStore("errorStore", null)
 
@@ -14,12 +15,14 @@ const App = () => {
   const [facts, setFacts] = useStore("factStore")
   const [error, setError] = useStore("errorStore")
 
-
+  let fiveFacts = []
   useEffect(() => {
     //fetch 250 cat facts at once, so that refreshing is faster
     axios.get("http://localhost:3001/api/facts").then(response => {
-      console.log("data ", response.data)
-      setFacts([...response.data])
+      console.log("data ", response.data.all)
+      setFacts([...response.data.all])
+      // fiveFacts = selectRandom(facts)
+
       return axios
     })
       .catch(error => {
@@ -28,6 +31,8 @@ const App = () => {
       })
 
   }, [])
+
+
 
 
   return (
@@ -39,7 +44,11 @@ const App = () => {
             <Dimmer active>
               <Loader>Loading facts</Loader>
             </Dimmer> :
-            <Route exact path="/" render={() => <FactList allFacts={facts} />} />
+            <div>
+              <Route exact path="/" render={() => <FactList allFacts={facts} />} />
+              <Route exact path="/facts/:id" render={({ match }) => <OneFact factId={match.params.id} />
+              } />
+            </div>
           }
         </div>
       </div>

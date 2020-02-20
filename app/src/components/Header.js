@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <Menu className="mainHeader" size="massive" stackable borderless attached inverted widths={1}>
             <MenuItem as={Link} to="/" name="Home">
-                click here to get a new set facts
+                click here to get a new set of facts
             </MenuItem>
         </Menu>
     )
