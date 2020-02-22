@@ -1,5 +1,5 @@
 import React from "react"
-import { Card, Statistic, Container, Divider, Segment } from 'semantic-ui-react'
+import { Statistic, Divider, Segment, Header } from 'semantic-ui-react'
 import { useStore } from "react-hookstore"
 
 
@@ -11,15 +11,30 @@ const OneFact = ({ factId }) => {
   console.log("fact in onefact ", fact)
 
   return (
-    <Segment >
-      <h1>Posted by one named {fact.user.name.first} {fact.user.name.last}</h1>
-      <Statistic floated="right" size="huge">
-        <Statistic.Value>{fact.upvotes}</Statistic.Value>
-        <Statistic.Label>upvotes on the cat-fact site</Statistic.Label>
-      </Statistic>
-      <Card header={fact.text} floated="left" />
+    <div>
+      <div>
+        <Header as="h2">
+          {fact.text.substring(0, fact.text.length - 1)}
+        </Header>
+        <Header as="h3" >... and that's a fact!</Header>
+
+
+      </div>
+
+
+
       <Divider></Divider>
-    </Segment>
+      <Segment className="statistic" circular floated="right">
+        <Statistic size="huge">
+          <Statistic.Value>{fact.upvotes}</Statistic.Value>
+          <Statistic.Label>{fact.upvotes === 1 ? "upvote " : "upvotes "} on the cat-fact site</Statistic.Label>
+        </Statistic>
+      </Segment>
+
+      <h2>Posted by one named {fact.user.name.first} {fact.user.name.last}</h2>
+
+    </div>
+
   )
 }
 
