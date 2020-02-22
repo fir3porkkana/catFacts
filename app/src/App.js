@@ -1,51 +1,63 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css'
 import { Loader, Dimmer } from "semantic-ui-react";
-import axios from "axios"
-import { BrowserRouter as Router, Route } from "react-router-dom"
+import useAxios from "axios-hooks"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { createStore, useStore } from "react-hookstore"
+
 import Header from "./components/Header"
 import FactList from "./components/FactList"
 import OneFact from './components/OneFact';
+import NotFound from "./components/NotFound"
+import selectRandom from "./utilities"
+
 createStore("factStore", null)
 createStore("errorStore", null)
 
 const App = () => {
   const [facts, setFacts] = useStore("factStore")
-  const [error, setError] = useStore("errorStore")
+  const [errorStore, setErrorStore] = useStore("errorStore")
+
+  const [fiveFacts, setFiveFacts] = useState()
+
+
+  const [{ data, loading, error }, refetch] = useAxios(
+    "http://localhost:3001/api/facts"
+  )
 
   useEffect(() => {
-    //fetch 250 cat facts at once, so that refreshing is faster
-    axios.get("http://localhost:3001/api/facts").then(response => {
-      console.log("data ", response.data.all)
-      setFacts([...response.data.all])
-      // fiveFacts = selectRandom(facts)
+    //fetch all ~200 facts from the server at once, so that refreshing and navigating is faster
+    //and more responsive
+    if (!loading) {
+      setFacts(data.all)
+      setFiveFacts(selectRandom(data.all))
+    }
+    if (error) {
+      setErrorStore(error)
+      console.log("error: ", error)
+    }
+  }, [loading, errorStore])
 
-      return axios
-    })
-      .catch(error => {
-        console.log("error: ", error)
-        setError(error)
-      })
-
-  }, [])
-
-
+  const getNewSet = () => {
+    setFiveFacts(selectRandom(facts))
+  }
 
 
   return (
     <Router>
       <div className="App">
-        <Header />
+        <Header getNewSet={getNewSet} />
         <div className="mainContent">
-          {!facts ?
+          {loading || !facts ?
             <Dimmer active>
               <Loader>Loading facts</Loader>
             </Dimmer> :
             <div>
-              <Route exact path="/" render={() => <FactList allFacts={facts} />} />
-              <Route exact path="/facts/:id" render={({ match }) => <OneFact factId={match.params.id} />
-              } />
+              <Switch>
+                <Route exact path="/" render={() => <FactList facts={fiveFacts} />} />
+                <Route exact path="/facts/:id" render={({ match }) => <OneFact factId={match.params.id} />} />
+                <Route component={NotFound} />
+              </Switch>
             </div>
           }
         </div>

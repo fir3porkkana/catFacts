@@ -3,10 +3,7 @@ import { Card } from 'semantic-ui-react'
 import selectRandom from "../utilities"
 import { Link } from 'react-router-dom'
 
-const FactList = ({ allFacts }) => {
-  const facts = selectRandom(allFacts)
-  console.log('facts ', facts);
-
+const FactList = ({ facts }) => {
 
   return (
     <div>

@@ -39,7 +39,12 @@ app.get("/api/facts/", (req, res, next) => {
             if (error || response.statusCode !== 200) {
                 console.log('error: ', error);
 
-                return res.status(500).json({ type: "error", message: error.message })
+                if (error) {
+                    return res.status(500).json({ type: "error", message: error.message })
+
+                } else {
+                    return res.status(500).json({ type: "error" })
+                }
             }
 
             res.json(JSON.parse(body))
