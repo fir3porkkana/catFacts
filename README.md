@@ -2,6 +2,8 @@
 coding homework for smartly.io
 
 ---
+## setup
+after cloning the project, run ```npm i``` in the root folder
 
 
 ## starting up the server
