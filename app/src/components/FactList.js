@@ -1,6 +1,5 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
-import selectRandom from "../utilities"
 import { Link } from 'react-router-dom'
 
 const FactList = ({ facts }) => {

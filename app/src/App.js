@@ -21,7 +21,7 @@ const App = () => {
   const [fiveFacts, setFiveFacts] = useState()
 
 
-  const [{ data, loading, error }, refetch] = useAxios(
+  const [{ data, loading, error }] = useAxios(
     "http://localhost:3001/api/facts"
   )
 
@@ -36,7 +36,7 @@ const App = () => {
       setErrorStore(error)
       console.log("error: ", error)
     }
-  }, [loading, errorStore])
+  }, [loading, errorStore, data, error, setErrorStore, setFacts])
 
   const getNewSet = () => {
     setFiveFacts(selectRandom(facts))

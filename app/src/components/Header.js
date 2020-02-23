@@ -1,10 +1,8 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 import { Menu, MenuItem } from "semantic-ui-react";
-import { useStore } from "react-hookstore"
 
 const Header = ({ getNewSet }) => {
-    const [facts, setFacts] = useStore("factStore")
 
     return (
         <Menu className="mainHeader" size="massive" stackable borderless attached inverted widths={2}>
