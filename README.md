@@ -9,4 +9,4 @@ run the command ```npm start``` in the project root folder, the server starts it
 
 
 ## starting up the frontend
-navigate to the folder /app and run ```npm start```. the client then starts up in the port ```3001```
+navigate to the folder /app and run ```npm start```. the client then starts up in the port ```3000```
