@@ -1,9 +1,9 @@
 import React from "react"
-import { Popup, Message } from 'semantic-ui-react'
+import { Message } from 'semantic-ui-react'
 import { useStore } from "react-hookstore"
 
 const Notification = () => {
-    const [error, setError] = useStore("errorStore")
+    const [error] = useStore("errorStore")
 
 
     if (!error) return null

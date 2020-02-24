@@ -9,6 +9,7 @@ import Header from "./components/Header"
 import FactList from "./components/FactList"
 import OneFact from './components/OneFact';
 import NotFound from "./components/NotFound"
+import Notification from "./components/Notification"
 import selectRandom from "./utilities"
 
 createStore("factStore", null)
@@ -28,7 +29,7 @@ const App = () => {
   useEffect(() => {
     //fetch all ~200 facts from the server at once, so that refreshing and navigating is faster
     //and more responsive
-    if (!loading) {
+    if (!loading && data) {
       setFacts(data.all)
       setFiveFacts(selectRandom(data.all))
     }
@@ -42,6 +43,11 @@ const App = () => {
     setFiveFacts(selectRandom(facts))
   }
 
+  if (error) {
+    return (
+      <Notification />
+    )
+  }
 
   return (
     <Router>
