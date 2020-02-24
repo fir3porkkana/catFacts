@@ -21,7 +21,7 @@ const App = () => {
   const [fiveFacts, setFiveFacts] = useState()
 
 
-  const [{ data, loading, error }] = useAxios(
+  const [{ data, loading, error }, refetch] = useAxios(
     "http://localhost:3001/api/facts"
   )
 
@@ -46,7 +46,7 @@ const App = () => {
   return (
     <Router>
       <div className="App">
-        <Header getNewSet={getNewSet} />
+        <Header getNewSet={getNewSet} refetchFacts={refetch} />
         <div className="mainContent">
           {loading || !facts ?
             <Dimmer active>
