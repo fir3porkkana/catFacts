@@ -7,7 +7,7 @@
     "start": "node index.js",
     "watch": "nodemon index.js",
     "test": "jest",
-    "build:client": "cd app && npm run build"
+    "build": "cd app && npm run build"
   },
   "repository": {
     "type": "git",
