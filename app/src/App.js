@@ -26,7 +26,7 @@ const App = () => {
 
   const [fiveFacts, setFiveFacts] = useState();
 
-  const [{ data, loading, error }, refetch] = useAxios({ uri });
+  const [{ data, loading, error }, refetch] = useAxios(uri);
 
   useEffect(() => {
     //fetch all ~200 facts from the server at once, so that refreshing and navigating is faster
