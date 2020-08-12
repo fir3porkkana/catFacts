@@ -32,6 +32,8 @@ const App = () => {
     //fetch all ~200 facts from the server at once, so that refreshing and navigating is faster
     //and more responsive
     if (!loading && data) {
+      console.log("data:", data);
+
       setFacts(data.all);
       setFiveFacts(selectRandom(data.all));
     }
