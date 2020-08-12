@@ -18,7 +18,7 @@ createStore("errorStore", null);
 const uri =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3001/api/facts"
-    : `${process.env.PUBLIC_URL}/api/facts`;
+    : "/api/facts";
 console.log("process.env: ", process.env)
 
 const App = () => {
